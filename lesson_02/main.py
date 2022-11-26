@@ -90,7 +90,7 @@ def four_stages():
     final_list = []
     for i in new_list:
         if not i in final_list:
-            final_list.append(int(i))
+            final_list.append(i)
     print(final_list)
     input('Нажмите Enter для выхода в меню')
     print()
