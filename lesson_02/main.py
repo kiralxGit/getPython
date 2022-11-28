@@ -38,6 +38,10 @@ def sequence_list():
     num = int(input('Задайте число n для формирования списка: '))
     nums_list = [(1 + 1 / i) ** i for i in range(1, num + 1)]
     print(*nums_list, sep=', ')
+    sum = 0
+    for i in nums_list:
+        sum += i
+    print(f'Сумма всех элементов: {sum:.2f}')
     input('Нажмите Enter для выхода в меню')
     print()
 
