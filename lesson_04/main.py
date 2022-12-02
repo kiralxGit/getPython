@@ -1,6 +1,6 @@
 from random import randint as ri
 
-def gen_equation(coef):
+def gen_equation(coef): # собираем уравнение из коэффициентов
     parts = []
     for i in reversed(range(0, len(coef))):
         if coef[i] != 0:
@@ -11,23 +11,41 @@ def gen_equation(coef):
                     parts.append(f'x')
                 elif i > 1:
                     parts.append(f'x**{i}')
-            elif coef[i] > 1:
+            elif coef[i] == -1:
+                if i == 0:
+                    parts.append(f'-1')
+                elif i == 1:
+                    parts.append(f'-x')
+                elif i > 1:
+                    parts.append(f'-x**{i}')
+            elif coef[i] > 1 or coef[i] < 0:
                 if i == 0:
                     parts.append(f'{coef[i]}')
                 elif i == 1:
                     parts.append(f'{coef[i]}*x')
                 elif i > 1:
                     parts.append(f'{coef[i]}*x**{i}')
-    return ' + '.join(parts) + ' = 0'
+    result = ''
+    for i in range(len(parts)):
+        if parts[i][0] == '-':
+            result += parts[i]
+        elif i == 0:
+            result += parts[i]
+        else:
+            result += ' + ' + parts[i]
+    result = result.replace('-', ' - ').strip() + ' = 0'
+    if result.startswith('- '):
+        result = result.replace('- ', '-', 1)
+    return result
 
-def save_file(eq):
+def save_file(eq): # сохраняем в файл
         name_file = int(input('Введите имя файла(только цифры) для записи или перезаписи: '))
         with open(f'{name_file}.txt', 'w') as data:
             data.write(eq)
 
-def create_equation_file():
+def create_equation_file(): # функция первой части программы
     k = int(input('Введите степень k: '))
-    coefficient = {i:ri(0, 5) for i in range(k + 1)}
+    coefficient = {i:ri(-100, 100) for i in range(k + 1)}
     print(f'Словарь: {coefficient}')
 
     equation = gen_equation(coefficient)
@@ -39,14 +57,14 @@ def create_equation_file():
 
 #------------------------------------------------------------------------------------------
 
-def parsing_to_monomials (eq):
+def parsing_to_monomials (eq): # парсим на одночлены
     for i in range(len(eq)):
         equals_id = eq[i].find('=')
-        eq[i] = eq[i][:equals_id].replace(' ','')
-        eq[i] = eq[i].split('+')
+        eq[i] = eq[i][:equals_id].replace(' - ', ' + -').split(' + ')
+
     return eq
 
-def monomials_to_dict(mons):
+def monomials_to_dict(mons): # разбираем одночлены на словари
     list_int = []
     for item in mons:
         dict_temp = {}
@@ -64,7 +82,7 @@ def monomials_to_dict(mons):
         list_int.append(dict_temp)
     return list_int
 
-def addition_monomials(list_dicts):
+def addition_monomials(list_dicts): # складываем словари
     result = {}
     for i in list_dicts:
         for key in i:
@@ -74,7 +92,7 @@ def addition_monomials(list_dicts):
                 result[key] += i[key]
     return result
 
-def sum_of_equations():
+def sum_of_equations(): # функция второй части программы
     name_files = []
     while len(name_files) < 2:
         name_files = input('Введите имена файлов через пробел: ')
