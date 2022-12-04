@@ -71,6 +71,8 @@ def monomials_to_dict(mons): # разбираем одночлены на сло
         for j in item:
             if j.find('*x**') != (-1):
                 dict_temp[int(j[j.find('*x**') + 4:])] = int(j[:j.find('*x**')])
+            elif j.find('-x**') != (-1):
+                    dict_temp[int(j[j.find('x**') + 3:])] = -1
             elif j.find('x**') != (-1):
                     dict_temp[int(j[j.find('x**') + 3:])] = 1
             elif j.find('*x') != (-1):
