@@ -70,8 +70,7 @@ def four_stages():
     print(f'Этап 1-ый, список: {rnd_list}')
 
     num = int(input('Этап 2-ой, какую цифру ищем?: '))
-    for i in range(len(rnd_list)):
-        rnd_list[i] = (str(rnd_list[i])).replace(str(num), '')
+    rnd_list = [str(item).replace(str(num), '') for item in rnd_list]
     print(f'Этап 2-ой, убрали цифру: {rnd_list}')
 
     input('Жмите Enter для перехода к 3-у этапу')

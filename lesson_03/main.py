@@ -23,12 +23,9 @@ def sum_odd_numbers():
 # [2, 3, 5, 6] => [12, 15]
 def multiply_pair():
     print()
-    my_list = input('Введите список чисел пробел: ').split()
-    my_list = [int(i) for i in my_list]
-    length = len(my_list)
-    new_list = []
-    for i in range(length - int(length / 2)):
-        new_list.append(my_list[i] * my_list[-(i + 1)])
+    my_list = list(map(int, input('Введите список чисел пробел: ').split()))
+    len = len(my_list) - int(len(my_list) / 2)
+    new_list = [(my_list[i] * my_list[- (i + 1)]) for i in range(len)]
     print(f'Произведение пар чисел списка = {new_list}')
     print()
 
@@ -42,9 +39,7 @@ def max_fractional():
     print()
     length = int(input('Введите длину списка: '))
     dc = decimal.Decimal
-    my_list = []
-    for i in range(length):  # заполняем массив сразу decimal с округлением до 2х симв в меньшую сторону
-        my_list.append(rnd(10, 99) + dc(rnd(10, 99) / 100).quantize(dc("1.00"), decimal.ROUND_DOWN))
+    my_list = [(rnd(10, 99) + dc(rnd(10, 99) / 100).quantize(dc("1.00"), decimal.ROUND_DOWN)) for i in range(length)]
     print('Рандомный список: [', end='')
     print(*my_list, sep=', ', end=']\n')
 
