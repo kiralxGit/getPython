@@ -41,6 +41,17 @@ def change_success():
 def remove_success():
       print('Контакт удалён!')
 
+def input_change_contact() -> int:
+    id = int(input('\nВведите номер контакта для изменения: '))
+    what_change = int(input('Что будете менять?: '
+                            '\n1. Имя'
+                            '\n2. Телефон'
+                            '\n3. Комментарий'))
+    return (id, what_change)
+
+def change_contact(data):
+    data = input(f'\nТекущее значение: {data}, введите новое:')
+    return data
 def remove_confirm(name):
       while True:
             confirm = input(f'Вы действительно хотите удалить {name}? (y/n)')

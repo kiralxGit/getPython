@@ -18,8 +18,12 @@ def main_menu(choice: int):
         case 4: # Добавить контакт
             contact = view.input_new_contact()
             pb.add_contact(contact)
-        case 5: # Изменить контакт
-            pass
+        case 5:  # Изменить контакт
+            phone_book = pb.get_phone_book()
+            view.print_phone_book(phone_book)
+            id_what_change = view.input_change_contact()
+            if pb.change_contact(id_what_change):
+                view.change_success()
         case 6: # Удалить контакт
             phone_book = pb.get_phone_book()
             view.print_phone_book(phone_book)

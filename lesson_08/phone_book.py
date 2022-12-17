@@ -14,6 +14,13 @@ def add_contact(contact: list):
     global phone_book
     phone_book.append(contact)
 
+def change_contact(id_what_change):
+    global phone_book
+    data = phone_book[id_what_change[0] - 1][id_what_change[1] - 1]
+    if data := view.change_contact(data):
+        phone_book[id_what_change[0] - 1][id_what_change[1] - 1] = data
+        return True
+    return False
 def remove_contact(id):
     global phone_book
     name = phone_book[id - 1][0]
