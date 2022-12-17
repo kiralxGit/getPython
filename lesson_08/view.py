@@ -28,6 +28,7 @@ def print_phone_book(phone_book: list):
                   print(id, *contact)
       else:
             print('Телефонная книга пуста или не загружена!')
+            return False
 
 def load_success():
       print('Телефонная книга загружена!')
@@ -73,5 +74,16 @@ def input_remove_contact() -> int:
       id = int(input('\nВведите номер контакта для удаления: '))
       return id
 
+def input_search_substring():
+      substring = input('\nЧто ищем?:')
+      return substring
+
+def print_search_list(search_list):
+      if len(search_list) > 0:
+            print('\nНайдено:')
+            for contact in search_list:
+                  print(*contact)
+      else:
+            print('\nНичего не найдено!')
 def log_off():
       print('До свидания!')

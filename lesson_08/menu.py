@@ -20,19 +20,22 @@ def main_menu(choice: int):
             pb.add_contact(contact)
         case 5:  # Изменить контакт
             phone_book = pb.get_phone_book()
-            view.print_phone_book(phone_book)
-            id_what_change = view.input_change_contact()
-            if pb.change_contact(id_what_change):
-                view.change_success()
+            if view.print_phone_book(phone_book) != False:
+                id_what_change = view.input_change_contact()
+                if pb.change_contact(id_what_change):
+                    view.change_success()
         case 6: # Удалить контакт
             phone_book = pb.get_phone_book()
-            view.print_phone_book(phone_book)
-            id = view.input_remove_contact()
-            if pb.remove_contact(id):
-                view.remove_success()
-
+            if view.print_phone_book(phone_book) != False:
+                id = view.input_remove_contact()
+                if pb.remove_contact(id):
+                    view.remove_success()
         case 7: # Найти контакт
-            pass
+            phone_book = pb.get_phone_book()
+            if view.print_phone_book(phone_book) != False:
+                search_substring = view.input_search_substring()
+                search_list = pb.find_contacts(search_substring)
+                view.print_search_list(search_list)
         case 0: # Выход
             return True
 

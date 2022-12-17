@@ -28,3 +28,14 @@ def remove_contact(id):
         phone_book.pop(id - 1)
         return True
     return False
+
+def find_contacts(search_substring: str) -> list:
+    global phone_book
+    search_list = []
+    for id, contact in enumerate(phone_book, 1):
+        temp = ';'.join(contact).lower()
+        if temp.find(str(search_substring).lower()) != (-1):
+            temp = contact[:]
+            temp.insert(0, id)
+            search_list.append(temp)
+    return search_list
